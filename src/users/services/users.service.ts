@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import * as sql from 'mssql'
 
 import { User } from '../entities/user.entity';
 import { Order } from '../entities/order.entity';
@@ -12,6 +13,7 @@ export class UsersService {
   constructor(
     private productsService: ProductsService,
     private configService: ConfigService,
+    @Inject('SQL') private clientSQL : sql.ConnectionPool
   ) {}
 
   private counterId = 1;
@@ -75,5 +77,18 @@ export class UsersService {
       user,
       products: this.productsService.findAll(),
     };
+  }
+
+
+  getTasks(){
+    
+    return this.clientSQL.connect().then(async  c=>{
+      
+      const result = await c.request().query("SELECT * FROM [dbo].[tasks]")
+      return result.recordset;
+    }).catch(err=>{
+      
+      return err.message
+    });
   }
 }
