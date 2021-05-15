@@ -20,6 +20,10 @@ import config from './config';
         API_KEY: Joi.number().required(),
         DATABASE_NAME: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
+        DATABASE_SERVER : Joi.string().required(),
+        DATABASE_PASSWORD : Joi.string().required(),
+        DATABASE_USER : Joi.string().required()
+
       }),
     }),
     HttpModule,
