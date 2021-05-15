@@ -14,9 +14,8 @@ const config :sql.config = {
       trustServerCertificate:true
     }
 }
+const client = new sql.ConnectionPool(config)
 
-
-// const client = new sql.ConnectionPool(config)
 // client.connect().then(async  c=>{
 //   console.log('Conectado')
 //   const result = await c.request().query("SELECT * FROM [dbo].[tasks]")
@@ -35,7 +34,7 @@ const config :sql.config = {
     },
     {
       provide : 'SQL',
-      useValue: config
+      useValue: client
     }
   ],
   exports: ['API_KEY', 'SQL'],
