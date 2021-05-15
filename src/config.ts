@@ -7,7 +7,7 @@ export default registerAs('config', () => {
       name :process.env.DATABASE_NAME,
       password:process.env.DATABASE_PASSWORD,
       user:process.env.DATABASE_USER,
-      port:process.env.DATABASE_PORT,
+      port:parseInt(process.env.DATABASE_PORT,10),
 
     },
     apiKey: process.env.API_KEY,
