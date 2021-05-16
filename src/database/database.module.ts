@@ -12,6 +12,28 @@ const API_KEY_PROD = 'PROD1212121SA';
 
 @Global()
 @Module({
+  imports : [
+    TypeOrmModule.forRootAsync({
+      inject : [configAPP.KEY],
+      useFactory: (configService: ConfigType<typeof configAPP>) =>{
+        const { name, port, password, server, user } = configService.database
+        console.log(configService.database)
+        return {
+          type : 'mssql',
+          username: user,
+          password: password,
+          port: port,
+          host: server,
+          database: name,
+          options:{
+            encrypt: false
+          }
+          
+        }
+        //return new sql.ConnectionPool(config)
+      },
+    })
+  ],  
   providers: [
     {
       provide: 'API_KEY',
@@ -41,6 +63,6 @@ const API_KEY_PROD = 'PROD1212121SA';
     },
     
   ],
-  exports: ['API_KEY', 'SQL'],
+  exports: ['API_KEY', 'SQL', TypeOrmModule],
 })
 export class DatabaseModule {}
