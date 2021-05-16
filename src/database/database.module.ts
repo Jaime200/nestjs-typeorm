@@ -17,7 +17,6 @@ const API_KEY_PROD = 'PROD1212121SA';
       inject : [configAPP.KEY],
       useFactory: (configService: ConfigType<typeof configAPP>) =>{
         const { name, port, password, server, user } = configService.database
-        console.log(configService.database)
         return {
           type : 'mssql',
           username: user,
@@ -25,6 +24,8 @@ const API_KEY_PROD = 'PROD1212121SA';
           port: port,
           host: server,
           database: name,
+          synchronize: true,
+          autoLoadEntities: true,
           options:{
             encrypt: false
           }
