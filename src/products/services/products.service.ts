@@ -23,15 +23,15 @@ export class ProductsService {
     return product;
   }
 
-  // create(data: CreateProductDto) {
-  //   this.counterId = this.counterId + 1;
-  //   const newProduct = {
-  //     id: this.counterId,
-  //     ...data,
-  //   };
-  //   this.products.push(newProduct);
-  //   return newProduct;
-  // }
+  create(data: CreateProductDto) {
+    const newProduct= new Product();
+    newProduct.image = data.image;
+    newProduct.name = data.name;
+    newProduct.description = data.description;
+    newProduct.price = data.price;
+    newProduct.stock = data.stock;
+    return this.productRepo.save(newProduct);
+  }
 
   // update(id: number, changes: UpdateProductDto) {
   //   const product = this.findOne(id);
