@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn  } from 'typeorm'
+import { 
+  Entity
+  , Column
+  , PrimaryColumn
+  , CreateDateColumn
+  , UpdateDateColumn  
+  , OneToOne
+  , JoinColumn
+} from 'typeorm'
+
+import { Customer } from './customer.entity';
 
 @Entity()
 export class User {
@@ -19,6 +29,10 @@ export class User {
 
   @UpdateDateColumn({type:'datetime', default : ()=>"CURRENT_TIMESTAMP"})
   updateAt: Date
-  
 
+  @OneToOne( ()=>Customer
+  , (customer)=>customer.user 
+  ,{ nullable: true} )
+  @JoinColumn()
+  customer:Customer
 }
