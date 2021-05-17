@@ -2,6 +2,8 @@ import {
   PrimaryGeneratedColumn 
   ,Column
   ,Entity
+  ,CreateDateColumn
+  ,UpdateDateColumn
 } from 'typeorm'
 
 @Entity()
@@ -24,4 +26,10 @@ export class Product {
 
   @Column({ type:'varchar'})
   image: string;
+
+  @CreateDateColumn({type:'datetime', default : ()=>"CURRENT_TIMESTAMP"})
+  createAt: Date
+
+  @UpdateDateColumn({type:'datetime', default : ()=>"CURRENT_TIMESTAMP"})
+  updateAt: Date
 }
