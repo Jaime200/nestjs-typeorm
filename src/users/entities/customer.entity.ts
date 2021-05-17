@@ -1,18 +1,17 @@
 import { 
     Entity
   , Column
-  , PrimaryColumn
+  , PrimaryGeneratedColumn
   , CreateDateColumn
   , UpdateDateColumn 
   , OneToOne
-  , JoinColumn
 } from 'typeorm'
 
 import { User } from './user.entity';
 @Entity()
 export class Customer {
 
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length:255})
