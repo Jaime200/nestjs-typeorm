@@ -24,7 +24,7 @@ const API_KEY_PROD = 'PROD1212121SA';
           port: port,
           host: server,
           database: name,
-          synchronize: true,
+          synchronize: false,
           autoLoadEntities: true,
           options:{
             encrypt: false
